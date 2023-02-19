@@ -1,0 +1,958 @@
+﻿Psd editor website.
+https://www.photopea.com/
+
+
+Paypay testing 
+donorbuyer@gmail.com
+aman@123
+
+
+paypal
+singh.himanshu989@gmail.com
+Himanshu@123
+
+
+Wordpress important
+
+
+1- pagination code on cpt 
+
+
+<?php
+
+
+$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+$args = array(
+     'post_type' => 'custom_post_type_name',
+     'posts_per_page' => 10,
+     'paged' => $paged
+);
+$loop = new WP_Query( $args );
+while ( $loop->have_posts() ) : $loop->the_post();     // CPT content
+endwhile;
+?>
+<nav class="pagination">
+     <?php
+     $big = 999999999;
+     echo paginate_links( array(
+          'base' => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+          'format' => '?paged=%#%',
+          'current' => max( 1, get_query_var('paged') ),
+          'total' => $loop->max_num_pages,
+          'prev_text' => '&laquo;',
+          'next_text' => '&raquo;'
+     ) );
+?>
+</nav>
+<?php wp_reset_postdata(); ?>
+
+
+
+
+
+
+2- 
+create custom plugin with custom post type with meta box in wordpress
+https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/
+
+
+3- Some project of ajay sunaja
+
+
+https://github.com/tutorialspoint2016
+
+
+
+
+
+
+4- csv file import programmatically 
+
+
+https://stackoverflow.com/questions/23910982/import-csv-code-with-insert-post-and-post-meta-tables
+
+
+5- vc code 
+
+
+@define( 'PARENT_DIR', get_template_directory() );
+@define( 'CHILD_DIR', get_stylesheet_directory() );
+@define( 'PARENT_URL', get_template_directory_uri() );
+
+
+@define( 'WF_WIDGETS_DIR', get_template_directory() . DIRECTORY_SEPARATOR . 'vc-elements' . DIRECTORY_SEPARATOR );
+
+
+@define( 'VC_WIDGET_ICO', PARENT_URL.'/images/ssslogo.png' ); 
+@define( 'VC_WIDGET_CAT', 'WFwidgets' );
+@define( 'VC_WIDGETS_DIR', PARENT_DIR.'/vc-elements/');
+if ( ! function_exists( 'wf_init_widgets' ) ) {
+        function wf_init_widgets() {
+                if ( $handle = opendir( WF_WIDGETS_DIR ) ) {
+                        while ( false !== ( $entry = readdir( $handle ) ) ) {
+                                if ( substr_count( $entry, 'widget-' ) > 0 ) {
+                                        require_once( WF_WIDGETS_DIR . $entry );
+                                }
+                        }
+                        closedir( $handle );
+                }
+                do_action( 'wf_after_init_widgets' );
+        }
+}
+wf_init_widgets();
+
+
+
+
+
+
+
+
+6- update user profile programmatically 
+
+
+https://wordpress.stackexchange.com/questions/9775/how-to-edit-a-user-profile-on-the-front-end
+
+
+https://wordpress.stackexchange.com/questions/45208/how-do-you-update-user-email-on-the-front-end-in-wp-3-3
+
+
+7- Get the number of items in cart in wordpress using woocommerce
+
+
+https://stackoverflow.com/questions/42866573/get-the-number-of-items-in-cart-in-wordpress-using-woocommerce
+
+
+8- paypal detail for testing
+
+
+amanalfa991@gmail.com
+aman@123
+
+
+
+
+9- testing credit card 
+
+
+
+
+Card Number
+	Expiry Date
+	CVC
+	Issuing Country
+	8171 9999 2766 0000
+	10/2030
+	737
+	CN
+	8171 9999 0000 0000 021
+	10/2030
+	737
+	CN
+	6243 0300 0000 0001
+	12/2029
+	737
+	CN
+	
+
+
+
+9- Woocommerce - Getting the order item price and quantity.
+
+
+https://stackoverflow.com/questions/40711160/woocommerce-getting-the-order-item-price-and-quantity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10-cpt
+
+
+add_post_type_support( 'loactions', 'thumbnail' );   
+function create_posttype() { 
+    register_post_type( 'loactions',
+        array(
+            'labels' => array(
+                'name' => __( 'Loactions' ),
+                'singular_name' => __( 'Loaction' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'loactions'),
+            'show_in_rest' => true, 
+        )
+    );
+}
+add_action( 'init', 'create_posttype' ); 
+
+
+
+
+11- make cpt with category.
+
+
+add_action('init', 'videos_categories_register');
+function videos_categories_register() {
+        $labels = array(
+                'name'                          => 'Videos Categories',
+                'singular_name'                 => 'Videos Category',
+                'search_items'                  => 'Search Videos Categories',
+                'popular_items'                 => 'Popular Videos Categories',
+                'all_items'                     => 'All Videos Categories',
+                'parent_item'                   => 'Parent Video Category',
+                'edit_item'                     => 'Edit Video Category',
+                'update_item'                   => 'Update Video Category',
+                'add_new_item'                  => 'Add New Video Category',
+                'new_item_name'                 => 'New Video Category',
+                'separate_items_with_commas'    => 'Separate videos categories with commas',
+                'add_or_remove_items'           => 'Add or remove videos categories',
+                'choose_from_most_used'         => 'Choose from most used videos categories'
+    );
+
+
+        $args = array(
+                'label'                         => 'Videos Categories',
+                'labels'                        => $labels,
+                'public'                        => true,
+                'hierarchical'                  => true,
+                'show_ui'                       => true,
+                'show_in_nav_menus'             => true,
+                'args'                          => array( 'orderby' => 'term_order' ),
+                'rewrite'                       => array( 'slug' => 'videos', 'with_front' => true, 'hierarchical' => true ),
+                'query_var'                     => true
+        );
+
+
+        register_taxonomy( 'videos_categories', 'videos', $args );
+}
+
+
+
+
+add_action('init', 'videos_register');
+function videos_register() {
+    $labels = array(
+                        'name' => 'Videos',
+                        'singular_name' => 'Video',
+                        'add_new' => 'Add New',
+                        'add_new_item' => 'Add New Video',
+                        'edit_item' => 'Edit Video',
+                        'new_item' => 'New Video',
+                        'view_item' => 'View Video',
+                        'search_items' => 'Search Videos',
+                        'not_found' =>  'Nothing found',
+                        'not_found_in_trash' => 'Nothing found in Trash',
+                        'parent_item_colon' => ''
+                );
+    $args = array(
+                        'labels' => $labels,
+                        'public' => true,
+                        'publicly_queryable' => true,
+                        'show_ui' => true,
+                        'query_var' => true,
+                        'has_archive' => true,
+                        'rewrite' => array( 'slug' => 'videos', 'with_front' => true ),
+                        'capability_type' => 'post',
+                        'menu_position' => 6,
+                        'supports' => array('title', 'excerpt', 'editor','thumbnail') 
+                );
+
+
+    register_post_type( 'videos' , $args );
+}
+
+
+
+
+
+
+11- https://github.com/poanchen/code-for-blog
+
+
+
+
+12 - add a field on the Users profile
+
+
+https://wordpress.stackexchange.com/questions/214719/how-do-i-add-a-field-on-the-users-profile-for-example-country-age-etc
+
+
+
+
+13- Upload files programmatically to users
+
+
+https://wordpress.stackexchange.com/questions/217110/upload-files-programmatically-to-users
+
+
+14 - Authenticates and logs a user in with 'remember' capability.
+
+
+https://core.trac.wordpress.org/browser/tags/5.5.1/src/wp-includes/user.php#L574
+
+
+15- Friend Add Block System Ajax Tutorial
+
+
+https://www.developphp.com/video/PHP/Friend-Add-Block-System-Ajax-Tutorial
+
+
+  16- How to Block a user in PHP this is my code
+
+
+https://stackoverflow.com/questions/22828475/how-to-block-a-user-in-php-this-is-my-code
+
+
+
+
+17- create meta in user as user_meta
+
+
+add_action( 'show_user_profile', 'extra_user_profile_fields' );
+add_action( 'edit_user_profile', 'extra_user_profile_fields' );
+function extra_user_profile_fields( $user ) { ?>
+    <h3><?php _e("Extra profile information", "blank"); ?></h3>
+    <table class="form-table">
+    <tr>
+        <th><label for="address"><?php _e("Lives in"); ?></label></th>
+        <td>
+            <input type="textarea" name="address" id="address" value="<?php echo esc_attr( get_the_author_meta( 'address', $user->ID ) ); ?>" class="regular-text" /><br />
+            <span class="description"><?php _e("Please enter your address."); ?></span>
+        </td>
+    </tr> 
+    <tr>
+        <th><label for="work"><?php _e("Work"); ?></label></th>
+        <td>
+            <input type="text" name="work" id="work" value="<?php echo esc_attr( get_the_author_meta( 'work', $user->ID ) ); ?>" class="regular-text" /><br />
+            <span class="description"><?php _e("Please enter your work."); ?></span>
+        </td>
+    </tr>
+    <tr>
+    <th><label for="dob"><?php _e("Date of birth"); ?></label></th>
+        <td>
+            <input type="date" name="dob" id="dob" value="<?php echo esc_attr( get_the_author_meta( 'dob', $user->ID ) ); ?>" class="regular-text" /><br />
+            <span class="description"><?php _e("Please enter your Date of birth."); ?></span>
+        </td>
+    </tr>
+    </table>
+<?php }
+
+
+add_action( 'personal_options_update', 'save_extra_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields' );
+
+
+function save_extra_user_profile_fields( $user_id ) {
+    if ( !current_user_can( 'edit_user', $user_id ) ) { 
+        return false; 
+    }
+    update_user_meta( $user_id, 'address', $_POST['address'] );
+    update_user_meta( $user_id, 'city', $_POST['city'] );
+    update_user_meta( $user_id, 'dob', $_POST['dob'] );
+}
+
+
+
+
+
+
+18- user registration in wordpress custom 
+
+
+https://stackoverflow.com/questions/40865296/wordpress-custom-registration-form-errors
+
+
+
+
+19- wordpress custom login from form 
+
+
+
+
+        Use code in wp config file first      ob_start();
+
+
+
+
+        global $wpdb;
+        if ( isset($_POST["pippin_user_Login"]) && isset($_POST["pippin_user_pass"]) ) {
+                
+                $creds = array();
+                $creds['user_login'] = $_POST['pippin_user_Login'];
+                $creds['user_password'] = $_POST['pippin_user_pass'];
+                $creds['remember'] = false;
+                $user = wp_signon( $creds, false );
+
+
+                if ( is_wp_error($user) ){
+                        echo '<div class="container"><div class="alert alert-warning">';
+                        //echo 'Error';
+                        echo $user->get_error_message(); 
+                        echo '</div></div>';
+                }else{
+                        wp_safe_redirect(home_url());
+                }
+        }
+
+
+
+
+
+
+
+
+20 - show category and subcategory code
+
+
+<?php // Get top level categories and list them $args = array('orderby' => 'name', 'parent' => 0); $categories = get_categories( $args ); foreach ($categories as $category) { echo $category->cat_name . '<br>'; $args2 = array('orderby' => 'name', 'parent' => $category->cat_ID); $subcategories = get_categories( $args2 ); echo '<ul>'; // While listing top level categories // list their child categories foreach ($subcategories as $subcategory) { echo '<li>' . $subcategory->cat_name . '</li>'; } echo '</ul>'; } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21-child theme make code 
+
+
+
+
+/*
+Theme Name: Gwangi-child
+Theme URI: https://www.themosaurus.com/gwangi
+Description: Premium WordPress template, clean and easy to use.
+Author: Themosaurus
+Author URI: https://www.themosaurus.com
+Version: 1.0.3
+Template: gwangi
+Tags: one-column, two-columns, three-columns, left-sidebar, right-sidebar, flexible-width,         custom-menu, full-width-template, rtl-language-support, sticky-post, theme- options,                     translation-ready
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+
+22- woocommerce hooks links
+
+
+https://woocommerce.github.io/code-reference/hooks/hooks.html
+
+
+23- set value after form submit in input type
+
+
+<?php $title = isset( $_POST['question-title'] ) ? $_POST['question-title'] : ''; ?>
+<input type="text" id="question-title" name="question-title" value="<?php echo esc_attr( $title ) ?>">
+
+
+
+
+
+
+
+
+24- code of add post from front end 
+
+
+function add_post(){
+        if(!empty($_POST['news_title'])){
+                $usersID =        get_current_user_id();
+                $new_post = array(        
+                        'post_title'    => $_POST['news_title'],
+                        'post_content'  => $_POST['media_content'],
+                        'post_type'     => 'dwqa-question',
+                        'post_author'   => 1,
+                        'post_author'         => $usersID,
+                        'post_category' => 'news_category',
+                        'post_status'   => 'publish'
+                );                
+                //echo "<pre>"; print_r($new_post);echo "</pre>";exit;          
+                $post_id = wp_insert_post($new_post);
+                
+                
+                if (!function_exists('wp_generate_attachment_metadata')){
+                        require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                        require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+                        require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+                }
+                if ($_FILES) {
+                        
+                        foreach ($_FILES as $file => $array) {
+                                if ($_FILES[$file]['error'] !== UPLOAD_ERR_OK) {
+                                        return "upload error : " . $_FILES[$file]['error'];
+                                }
+                                $attach_id = media_handle_upload( $file, $post_id );
+                        }
+                }                                        
+                if($attach_id>0){
+                        set_post_thumbnail( $post_id, $attach_id );
+                }
+        }        
+?>
+        <form action="" class="user_login" method="POST" enctype="multipart/form-data">
+                <div class="container"> 
+                        <div class="row">
+                                <?php if($post_id == true) { ?>
+                                        <br/>
+                                        <div class="alert alert-success">
+                                          <strong>Success!</strong> Your post successfully added.
+                                        </div>
+                                <?php } ?>
+                        </div>
+                        <div class="input-groupp">
+                                <div class="input-groupp-icon">
+                                        <img src="<?php echo get_avatar_url( get_the_author_meta( 'ID' ) ); ?>" style="height: 35px;border-radius: 15px;">
+                                </div>
+                                <?php 
+                                        $current_user = wp_get_current_user(); 
+                                        $username = $current_user->user_firstname ;
+                                ?>
+                                <div class="input-groupp-area">
+                                        <input type="text" name="news_title" id="news_title" placeholder="Hi <?php echo $username;?>, start a new discussion." required>
+                                </div>
+                        </div>  
+                        <div class="posticons">
+                                <div class="ic">
+                                        <img src="http://vrweld.com/demo/wp-content/uploads/2020/08/0001.png">
+                                        <img src="http://vrweld.com/demo/wp-content/uploads/2020/08/0002.png">
+                                        <img src="http://vrweld.com/demo/wp-content/uploads/2020/08/00-03.png">
+                                        <img src="http://vrweld.com/demo/wp-content/uploads/2020/08/0004.png">
+                                </div>
+                        </div><br><br>          
+                        
+                        <?php
+                                $args = array(
+                                        'hide_empty'      => false,
+                                        'taxonomy'                 => 'dwqa-question_category',
+                                        'orderby'                 => 'name', 
+                                        'hide_empty'    => -1,
+                                        'parent'                 => 0,
+                                        'number'                 => 5,
+                                );
+                                $categories= get_categories($args);
+                        ?>
+                        <div class="open-on-click" id="open-on-click"> 
+                                <label for="username">Category</label><br>
+                                <select name="news_category" id="news_category" required>
+                                        <?php foreach($categories as $category){ ?>
+                                                <option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name; ?></option>
+                                        <?php } ?>
+                                </select><br><br>
+                        
+                                <label for="username">Feature Image</label><br>
+                                <input type="file" name="feature_img" id="news_title" required><br><br>
+                        
+                                <label for="password"><b>Content</b></label> 
+                                <!-- <textarea rows="10" required></textarea> -->
+                                <style>#qt_media_content_toolbar input{width:5% !important;}</style>
+                                <?php                
+                                        //wp_enqueue_media();
+                                        wp_editor( '', 'media_content', $settings = array('textarea_name' => 'media_content', 'textarea_rows' => '10', 'media_buttons'=>true) );
+                                ?>
+                                <button type="submit" class="loginbtn" style="margin-top:20px;margin-bottom:30px">Post</button>
+                        </div>                
+                </div>
+        </form> 
+        
+        
+<?php         
+}        
+add_shortcode('add_post_shortcode', 'add_post');
+
+
+
+
+
+
+26- get config path in any file…
+
+
+require_once(getcwd().'/wp-config.php');
+
+
+27- Delete / trash posts in Wordpress front-end using ajax
+        Use this code in functions.php         
+<?php 
+add_action( 'wp_ajax_my_delete_post', 'my_delete_post' );
+function my_delete_post(){
+    $permission = check_ajax_referer( 'my_delete_post_nonce', 'nonce', false );
+    if( $permission == false ) {
+        echo 'error';
+    }
+    else {
+        wp_trash_post( $_REQUEST['id'] );
+        echo 'success';
+    }
+    wp_die();
+}
+?>
+Use this js code on page where you want..
+<script>
+jQuery(document).ready(function($){
+    $( '.delete-post' ).click( function() {
+        var id = $(this).data('id');
+        var nonce = $(this).data('nonce');
+        $.ajax({
+            type: 'post',
+            url: ajaxUrl,
+            data: {
+                action: 'my_delete_post',
+                nonce: nonce,
+                id: id
+            },
+            success: function( result ) {
+                                console.log("deleteed");
+            }
+        })
+        return false; 
+    }); 
+});
+</script>
+
+
+<?php $nonce = wp_create_nonce('my_delete_post_nonce') ?>
+<a href="<?php echo admin_url( 'admin-ajax.php?action=my_delete_post&id=' . get_the_ID() . '&nonce=' . $nonce ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo $nonce ?>" class="delete-post"><?php _e( 'Trash', 'my-theme' ); ?></a>
+
+
+
+
+
+
+
+
+27 - how to make like and dislike post in wordpress programmatically code
+https://inspirationalpixels.com/add-likes-to-wordpress-posts/
+
+
+https://wordpress.stackexchange.com/questions/361581/like-dislike-functionality-using-javascript
+https://codewithawa.com/posts/like-dislike-system-with-php-and--mysql
+
+
+28 - Increase upload file size of xampp from htaccess file code
+
+
+php_value upload_max_filesize 512M
+php_value post_max_size 512M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+
+29- Post feature image insert using ajax..
+
+
+https://wordpress.stackexchange.com/questions/370990/how-to-use-wp-ajax-set-post-thumbnail
+
+
+
+
+
+
+30 - Buy one get second 50% off for WooCommerce product variations
+
+
+https://stackoverflow.com/questions/45255375/apply-a-discount-only-on-the-second-cart-item-in-woocommerce
+
+
+
+
+31- woocommerce cart page display products order by product price
+https://stackoverflow.com/questions/17194899/woocommerce-cart-page-display-products-order-by-product-price
+
+
+
+
+32- How To Export Posts To CSV In WordPress
+https://artisansweb.net/export-posts-csv-wordpress/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100*1/100
+user of if(1%<=dislike){
+        post disable
+}
+
+
+
+
+
+
+get product image in woocommerce and send email to administrator
+
+
+33- woocommerce tm extra product options plugin
+
+
+https://drive.google.com/file/d/11QxM7sIW6NgwCzSJz6dfV8QFWmU83L6z/view
+
+
+34- Cron job set by cpanel 
+
+
+curl http://3.219.153.99/~agencytools/sslcheck/
+
+
+
+
+35- Add new user login from function  
+
+
+add_action('init', 'add_my_user');
+function add_my_user() {
+    $username = 'admin';
+    $email = 'admin@gnmail.com';
+    $password = 'admin';
+
+
+    $user_id = username_exists( $username );
+    if ( !$user_id && email_exists($email) == false ) {
+        $user_id = wp_create_user( $username, $password, $email );
+        if( !is_wp_error($user_id) ) {
+            $user = get_user_by( 'id', $user_id );
+            $user->set_role( 'administrator' );
+        }
+    }
+}
+
+
+
+
+36- Add buy now button on single product page 
+https://medium.com/@dwebsoftguy/add-buy-now-button-in-woocommerce-804528d41ecf
+#Add btn code in woocommerce in simple.php 
+
+
+<button type="submit" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>" class="single_add_to_cart_button button alt buy-now" id="buy_now_button">
+<?php echo esc_html('Buy Now'); ?>
+</button>
+
+
+#Add code in function.php 
+#Buy now button on single product page
+function buy_now_submit_form() {
+?>
+<script>
+jQuery(document).ready(function(){
+        jQuery('#buy_now_button').click(function(){
+                jQuery('#is_buy_now').val('1');
+                jQuery('form.cart').submit();
+        });
+});
+</script>
+<?php
+}
+add_action('woocommerce_after_add_to_cart_form', 'buy_now_submit_form');
+
+
+add_filter('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
+function redirect_to_checkout($redirect_url) {
+        if (isset($_REQUEST['is_buy_now']) && $_REQUEST['is_buy_now']) {
+                global $woocommerce;
+                $redirect_url = wc_get_checkout_url();
+        }
+        return $redirect_url;
+}
+
+
+
+
+37-  If menu item has children , add class in menu 
+
+
+add_filter('nav_menu_css_class' , 'v123_nav_class' , 10 , 2 );
+function v123_nav_class ($classes, $item) {
+    if (in_array('menu-item-has-children', $classes) ){
+        $classes[] = 'item-has-children';
+    }
+    return $classes;
+}
+
+
+
+
+
+
+39- Add image with crop in Codiegineter .
+
+https://techarise.com/demos/codeigniter/codeigniter-jquery-crop-image
+
+
+40 - Load more for custom post type
+
+
+https://ioecapsule.com/wordpress-load-more-posts-using-ajax-on-button-click/
+
+
+
+
+Functions.php
+
+
+function bsubash_load_more_scripts() {
+        wp_enqueue_script('jquery');
+        wp_register_script( 'loadmore_script', get_stylesheet_directory_uri() . '/js/ajax.js', array('jquery') );
+        wp_localize_script( 'loadmore_script', 'loadmore_params', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+        ) );
+
+
+         wp_enqueue_script( 'loadmore_script' );
+}
+ 
+add_action( 'wp_enqueue_scripts','bsubash_load_more_scripts' );
+
+
+
+
+function bsubash_loadmore_ajax_handler(){
+        $type = $_POST['type'];
+        $category = isset($_POST['category']) ? $_POST['category']: '';
+        $args['paged'] = $_POST['page'] + 1;
+        $args['post_status'] = 'publish';
+        $args['posts_per_page'] =  $_POST['limit'];
+        if($type == 'archive'){
+                $args['category_name'] = $category;
+        }
+        query_posts( $args );
+        if( have_posts() ) :
+                while(have_posts()): the_post();        
+//write your single post card        
+                the_title();
+the_excerpt();
+    endwhile;
+        endif;
+        die;
+}
+add_action('wp_ajax_loadmore','bsubash_loadmore_ajax_handler');
+add_action('wp_ajax_nopriv_loadmore','bsubash_loadmore_ajax_handler');
+
+
+
+
+
+
+
+
+Code 
+
+
+<div class="latest_posts_wrapper">
+   <?php
+      $paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
+      $latests = new WP_Query(array(
+              'post_type' => 'post',
+              'posts_per_page' => 3,
+              'paged' => $paged
+      ));
+      
+      while($latests->have_posts()): $latests->the_post();                
+              //put the post card here
+      the_title();
+      the_excerpt
+      endwhile;
+      ?>
+</div>
+<script>
+   var limit = 3,
+       page = 1,
+       type = 'latest',
+       category = '',
+       max_pages_latest = <?php echo $latests->max_num_pages ?>
+</script>
+<?php if ( $latests->max_num_pages > 1 ){
+   echo '<div class="load_more text-center">
+                    <a href="#" class="btn btn-circle btn-inverse btn-load-more">More Article</a> 
+                </div>';
+        }else{?>
+<article>
+   <h1>Sorry...</h1>
+   <p><?php _e('Sorry, No Posts Available !'); ?></p>
+</article>
+<?php }
+   wp_reset_query();
+   ?>
+
+
+
+
+theme_directory/js/ajax.js
+
+
+
+
+
+
+
+
+jQuery(function($) {
+    $('.btn-load-more').click(function(e) {
+        e.preventDefault();
+        var button = $(this),
+            data = {
+                'action': 'loadmore',
+                'limit': limit,
+                'page': page,
+                'type': type,
+                'category': category
+            };
+
+
+        $.ajax({
+            url: loadmore_params.ajaxurl,
+            data: data,
+            type: 'POST',
+            beforeSend: function(xhr) {
+                button.text('Loading...'); // change the button text, you can also add a preloader image
+            },
+            success: function(data) {
+                if (data) {
+$(".latest_posts_wrapper").append(data);
+                    page++;
+                    button.text('More Articles');
+                    if (page == max_pages_latest)
+                        button.remove(); // if last page, remove the button
+                } else {
+                    button.remove(); // if no data, remove the button as well
+                }
+            }
+        });
+    });
+
+
+});
