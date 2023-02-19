@@ -62,10 +62,6 @@ https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/
 https://github.com/tutorialspoint2016
 
 
-
-
-
-
 4- csv file import programmatically 
 
 
@@ -102,12 +98,6 @@ if ( ! function_exists( 'wf_init_widgets' ) ) {
 wf_init_widgets();
 
 
-
-
-
-
-
-
 6- update user profile programmatically 
 
 
@@ -129,12 +119,7 @@ https://stackoverflow.com/questions/42866573/get-the-number-of-items-in-cart-in-
 amanalfa991@gmail.com
 aman@123
 
-
-
-
 9- testing credit card 
-
-
 
 
 Card Number
@@ -161,25 +146,6 @@ Card Number
 
 
 https://stackoverflow.com/questions/40711160/woocommerce-getting-the-order-item-price-and-quantity
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 10-cpt
 
@@ -293,8 +259,6 @@ function videos_register() {
 https://wordpress.stackexchange.com/questions/214719/how-do-i-add-a-field-on-the-users-profile-for-example-country-age-etc
 
 
-
-
 13- Upload files programmatically to users
 
 
@@ -368,16 +332,10 @@ function save_extra_user_profile_fields( $user_id ) {
 }
 
 
-
-
-
-
 18- user registration in wordpress custom 
 
 
 https://stackoverflow.com/questions/40865296/wordpress-custom-registration-form-errors
-
-
 
 
 19- wordpress custom login from form 
@@ -411,36 +369,13 @@ https://stackoverflow.com/questions/40865296/wordpress-custom-registration-form-
         }
 
 
-
-
-
-
-
-
 20 - show category and subcategory code
 
 
 <?php // Get top level categories and list them $args = array('orderby' => 'name', 'parent' => 0); $categories = get_categories( $args ); foreach ($categories as $category) { echo $category->cat_name . '<br>'; $args2 = array('orderby' => 'name', 'parent' => $category->cat_ID); $subcategories = get_categories( $args2 ); echo '<ul>'; // While listing top level categories // list their child categories foreach ($subcategories as $subcategory) { echo '<li>' . $subcategory->cat_name . '</li>'; } echo '</ul>'; } ?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 21-child theme make code 
-
-
-
 
 /*
 Theme Name: Gwangi-child
@@ -467,13 +402,6 @@ https://woocommerce.github.io/code-reference/hooks/hooks.html
 
 <?php $title = isset( $_POST['question-title'] ) ? $_POST['question-title'] : ''; ?>
 <input type="text" id="question-title" name="question-title" value="<?php echo esc_attr( $title ) ?>">
-
-
-
-
-
-
-
 
 24- code of add post from front end 
 
@@ -584,10 +512,6 @@ function add_post(){
 add_shortcode('add_post_shortcode', 'add_post');
 
 
-
-
-
-
 26- get config path in any file…
 
 
@@ -638,12 +562,6 @@ jQuery(document).ready(function($){
 <a href="<?php echo admin_url( 'admin-ajax.php?action=my_delete_post&id=' . get_the_ID() . '&nonce=' . $nonce ) ?>" data-id="<?php the_ID() ?>" data-nonce="<?php echo $nonce ?>" class="delete-post"><?php _e( 'Trash', 'my-theme' ); ?></a>
 
 
-
-
-
-
-
-
 27 - how to make like and dislike post in wordpress programmatically code
 https://inspirationalpixels.com/add-likes-to-wordpress-posts/
 
@@ -667,41 +585,17 @@ php_value max_input_time 300
 https://wordpress.stackexchange.com/questions/370990/how-to-use-wp-ajax-set-post-thumbnail
 
 
-
-
-
-
 30 - Buy one get second 50% off for WooCommerce product variations
 
 
 https://stackoverflow.com/questions/45255375/apply-a-discount-only-on-the-second-cart-item-in-woocommerce
 
-
-
-
 31- woocommerce cart page display products order by product price
 https://stackoverflow.com/questions/17194899/woocommerce-cart-page-display-products-order-by-product-price
 
 
-
-
 32- How To Export Posts To CSV In WordPress
 https://artisansweb.net/export-posts-csv-wordpress/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 100*1/100
 user of if(1%<=dislike){
@@ -709,16 +603,9 @@ user of if(1%<=dislike){
 }
 
 
-
-
-
-
 get product image in woocommerce and send email to administrator
 
-
 33- woocommerce tm extra product options plugin
-
-
 https://drive.google.com/file/d/11QxM7sIW6NgwCzSJz6dfV8QFWmU83L6z/view
 
 
@@ -804,10 +691,6 @@ function v123_nav_class ($classes, $item) {
 }
 
 
-
-
-
-
 39- Add image with crop in Codiegineter .
 
 https://techarise.com/demos/codeigniter/codeigniter-jquery-crop-image
@@ -817,9 +700,6 @@ https://techarise.com/demos/codeigniter/codeigniter-jquery-crop-image
 
 
 https://ioecapsule.com/wordpress-load-more-posts-using-ajax-on-button-click/
-
-
-
 
 Functions.php
 
@@ -862,13 +742,6 @@ the_excerpt();
 add_action('wp_ajax_loadmore','bsubash_loadmore_ajax_handler');
 add_action('wp_ajax_nopriv_loadmore','bsubash_loadmore_ajax_handler');
 
-
-
-
-
-
-
-
 Code 
 
 
@@ -908,17 +781,7 @@ Code
    wp_reset_query();
    ?>
 
-
-
-
 theme_directory/js/ajax.js
-
-
-
-
-
-
-
 
 jQuery(function($) {
     $('.btn-load-more').click(function(e) {
